@@ -8,12 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var wordToGuess = 0
+    @State private var wordsGuessed = 0
+    @State private var wordsMissed = 0
+    @State private var wordsInGame = 0
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("Words Guessed: \(wordsGuessed)")
+                    Text("Words Missed: \(wordsMissed) ")
+                }
+                Spacer()
+                VStack(alignment: .leading) {
+                    Text("Words to Guess: \(wordToGuess)")
+                    Text("Words in Game: \(wordsInGame)")
+                }
+            }
         }
         .padding()
     }
