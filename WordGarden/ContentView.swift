@@ -17,7 +17,7 @@ struct ContentView: View {
     // wordToGuess is a variable that will hold the current word being guessed from the wordsToGuess array
     @State private var wordToGuess = ""
     @State private var lettersThatUserGuessed = ""
-    @State private var howManyGuesses = "How many words are in this guess"
+    @State private var gameStatusMessage = "How many words are in this guess"
     @State private var letterThatUserGuessed = ""
     @State private var anotherGuess = true
     
@@ -49,7 +49,7 @@ struct ContentView: View {
             
             Spacer()
             
-            Text(howManyGuesses)
+            Text(gameStatusMessage)
             
             /// TODO: You need to initialize `revealWord` and `wordToGuess` when the app starts
             Text(revealedWord)
@@ -78,6 +78,12 @@ struct ContentView: View {
                             }
                             letterThatUserGuessed = String(lastCharacter).uppercased()
                         }
+                        .onSubmit {
+                            guard letterThatUserGuessed != "" else {
+                                return
+                            }
+                            updateGamePlay()
+                        }
                         .focused($textFieldIsFocused)
                     
                     Button("Guess Letter") {
@@ -97,6 +103,7 @@ struct ContentView: View {
 
                         }
                         letterThatUserGuessed = ""
+                        updateGamePlay()
                         
                     }
                     .buttonStyle(.bordered)
@@ -125,6 +132,11 @@ struct ContentView: View {
             revealedWord =  String(repeating: " _", count: wordToGuess.count)
         }
     }
+    
+    func updateGamePlay() {
+        
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
